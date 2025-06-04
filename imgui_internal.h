@@ -507,6 +507,8 @@ static inline float  ImTrunc(float f)                                           
 static inline ImVec2 ImTrunc(const ImVec2& v)                                   { return ImVec2((float)(int)(v.x), (float)(int)(v.y)); }
 static inline float  ImFloor(float f)                                           { return (float)((f >= 0 || (float)(int)f == f) ? (int)f : (int)f - 1); } // Decent replacement for floorf()
 static inline ImVec2 ImFloor(const ImVec2& v)                                   { return ImVec2(ImFloor(v.x), ImFloor(v.y)); }
+static inline float  ImTrunc64(float f)                                         { return (float)(ImS64)(f); }
+static inline float  ImRound64(float f)                                         { return (float)(ImS64)(f + 0.5f); }
 static inline int    ImModPositive(int a, int b)                                { return (a + b) % b; }
 static inline float  ImDot(const ImVec2& a, const ImVec2& b)                    { return a.x * b.x + a.y * b.y; }
 static inline ImVec2 ImRotate(const ImVec2& v, float cos_a, float sin_a)        { return ImVec2(v.x * cos_a - v.y * sin_a, v.x * sin_a + v.y * cos_a); }
@@ -2568,7 +2570,6 @@ struct ImGuiContext
     // Platform support
     ImGuiPlatformImeData    PlatformImeData;                    // Data updated by current frame. Will be applied at end of the frame. For some backends, this is required to have WantVisible=true in order to receive text message.
     ImGuiPlatformImeData    PlatformImeDataPrev;                // Previous frame data. When changed we call the platform_io.Platform_SetImeDataFn() handler.
-    ImGuiID                 PlatformImeViewport;
 
     // Extensions
     // FIXME: We could provide an API to register one slot in an array held in ImGuiContext?
